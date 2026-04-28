@@ -1,0 +1,36 @@
+name: update-commit-stats
+
+on:
+  schedule:
+    - cron: "0 9 * * *"   # 09:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-commit-stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run update script
+        env:
+          GH_TOKEN: ${{ secrets.STATS_PAT }}
+        run: bash scripts/update-commits.sh
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet README.md; then
+            echo "No diff — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: update commit count [skip ci]"
+          git push

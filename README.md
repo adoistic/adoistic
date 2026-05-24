@@ -2,7 +2,7 @@
 
 I run **Thothica** and **Studio Whence**. Outside of them I build for translation, philosophical corpora, archives, and print. It's all the same thing: AI for the long tail of human knowledge nobody else is bothering with.
 
-Shipping <!--commits-start-->1,360<!--commits-end--> commits since February 2026 across two companies and open-source work.
+Shipping <!--commits-start-->1,434<!--commits-end--> commits since February 2026 across two companies and open-source work.
 
 ### Companies
 
